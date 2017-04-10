@@ -25,7 +25,7 @@ public class Main {
                         "C:\\Users\\nitzan\\Desktop\\לימודים\\שנה ג\\סמסטר ו\\אבטחת מחשבים\\עבודה 2\\examples\\IV_example.txt",
                         "C:\\Users\\nitzan\\Desktop\\לימודים\\שנה ג\\סמסטר ו\\אבטחת מחשבים\\עבודה 2\\examples");
 
-      //  tmp1.encryption();
+        //tmp1.encryption();
         tmp2.decryption();
     }
 }

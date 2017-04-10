@@ -25,15 +25,18 @@ public class encryptionDecryption
 
     public void encryption () {
         loadKey();
-        char[] cipherText = new char[m_sizeOfEncryption];
+
 
         readWrite readPlainText = new readWrite(m_sizeOfEncryption, m_pathText);
         readWrite readInitialVector = new readWrite(m_sizeOfEncryption, m_pathInitialVector);
 
+
+
         char[] PlainText = readPlainText.read();
         char[] InitialVector = readInitialVector.read();
+        char[] cipherText = new char[PlainText.length];
         // take the first set of plain text and xor it with the Initial Vector
-        for (int i = 0; i < cipherText.length; i++) {
+        for (int i = 0; i < PlainText.length; i++) {
             cipherText[i] = (char) (PlainText[i] ^ InitialVector[i]);
         }
         // take the first set of (plain text xor Initial Vector) and shaffale with the key
@@ -47,12 +50,18 @@ public class encryptionDecryption
 
         while ((PlainText = readPlainText.read()) != null) {
 
-            for (int i = 0; i < cipherText.length; i++) {
+
+            for (int i = 0; i < PlainText.length; i++) {
                 cipherText[i] = (char) (PlainText[i] ^ cipherText[i]);
             }
             for (int i = 0; i < cipherText.length; i++) {
                 if (m_key.containsKey(cipherText[i])) {
                     cipherText[i] = m_key.get(cipherText[i]);
+                }
+            }
+            if (PlainText.length<m_sizeOfEncryption){
+                for (int i = PlainText.length ; i<cipherText.length ; i++){
+                    cipherText[i]=0;
                 }
             }
             // can use any of the readWrite object to write. its dosnt matter

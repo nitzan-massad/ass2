@@ -51,15 +51,22 @@ public class readWrite
 
     public void write(char [] arrayToWrite , String pathToWriteAndFileName)
     {
+
         try{
             if (m_writer == null ) {
                 m_writer = new PrintWriter(pathToWriteAndFileName, "UTF-8");
-                m_writer.write(arrayToWrite);
+                for (int i = 0 ; i < arrayToWrite.length ; i++){
+                  if (arrayToWrite[i]!= 0)
+                    m_writer.append(arrayToWrite[i]);
+                }
                 m_writer.close() ;
 
             }else {
                 FileWriter fw = new FileWriter(pathToWriteAndFileName, true);
-               fw.write(arrayToWrite);
+                for (int i = 0 ; i < arrayToWrite.length ; i++){
+                    if (arrayToWrite[i]!= 0)
+                        fw.write(arrayToWrite[i]);
+                }
               fw.close();
             }
         }
